@@ -9,3 +9,10 @@
 ## 終了時のコマンド
 1. docker-compose stop
 
+## mysqlコンテナに入るコマンド
+1. docker exec -it mysql /bin/sh
+
+### mysql起動コマンド
+1. mysql -p 33306 -u root -p
+### pass
+root
