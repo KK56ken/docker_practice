@@ -25,3 +25,6 @@ use test;
 show tables;
 
 select * from users;
+
+## BD終了コマンド
+exit
