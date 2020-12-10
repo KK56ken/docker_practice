@@ -16,3 +16,12 @@
 1. mysql -p 33306 -u root -p
 ### pass
 root
+
+## BD確認コマンド
+show databases;
+
+use test;
+
+show tables;
+
+select * from users;
