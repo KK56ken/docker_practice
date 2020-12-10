@@ -7,5 +7,5 @@
 1. docker-compose up -d
 
 ## 終了時のコマンド
-1. docker-compose down
+1. docker-compose stop
 
