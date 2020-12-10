@@ -1,0 +1,12 @@
+FROM php:7.2-apache
+RUN apt-get update && \
+    # PHPのExtensionをインストール．
+    # mysqliは拡張モジュール PHPで簡単にDBにアクセスできるようにしている（クエリでアクセスできる）
+    # mbstringは日本語対応させている
+    docker-php-ext-install mysqli mbstring
+
+WORKDIR /var/www/html
+    #コンテナに入った時のディレクトリ
+
+EXPOSE 80
+    #明示的にどのポートが開放されているかわかるようにするため（この記述がなくてもポート開放できる模様）

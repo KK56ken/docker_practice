@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  web:
+    container_name: php #コンテナの名前を指定する  https://docs.docker.jp/compose/compose-file.html#build
+    build:
+      context: ./docker #コンテクスト（訳者注：内容物の意味）には Dockerfile があるディレクトリのパスや Git リポジトリの URL を指定します。
+      dockerfile: dockerfile #Compose は構築時に別のファイルを使えます。構築時のパスも指定する必要があります。
+    tty: true #docker-compose upしたコンテナを起動させ続ける。
+    volumes: #dockerfileのCOPYと同じ　ただし、buildしなくても変更されたfileを検知し、コンテナと同期できる。
+      - ./app:/var/www/html #https://www.linuxteacher.com/docker-add-vs-copy-vs-volume/
+    ports: #ポートフォワーディングの設定　
+      - "8080:80"
+  db:
+    container_name: mysql
+    image: mysql #docker hubにあるイメージを取得してきている
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 33306:3306
+    # コンテナに入らずmysqlにアクセスする方法 mysql --host 127.0.0.1 --port 33306 -u root -p
